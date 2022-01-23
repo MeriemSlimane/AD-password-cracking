@@ -16,6 +16,7 @@ hashes = open("AD_password_dump.txt","r").read().split("\n")
 wordlist = open("wordlist.txt","r").read().split("\n")
 # si on veut lancer ce script sur un vrai AD, on doit utiliser une wordlist puissante (par exemple qui respecte  les exigences de complexité d'un mot de passe)
 # ici juste pour la démonstration, on a concaténé les deux wordlists pour avoir un maximum de possibilité
+# lien de téléchargement de rockyou.txt (https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)
 wordlist += open("rockyou.txt","r").read().split("\n")
 
 users = {} # initiate users dictionary with hashed passwords
